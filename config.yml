@@ -1,0 +1,22 @@
+files:
+    main.go:
+        from: ./template/mainTemplate.go
+        to: ./
+    docker-compose.yml:
+        from: ./template/dockerComposeTemplate.yml
+        to: ./
+    .gitignore:
+        from: ./template/.gitignoreTemplate
+        to: ./
+    Dockerfile:
+        from: ./template/DockerfileTemplate
+        to: ./
+    Godeps.json:
+        from: ./template/GodepsTemplate.json
+        to: ./Godeps/
+    makefile:
+        from: ./template/makefileTemplate
+        to: ./
+    VERSION:
+        from: ./template/versionTemplate
+        to: ./

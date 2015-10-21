@@ -1,0 +1,4 @@
+files:
+    main.go:
+        from: ./template/mainTemplate.go
+        to: ./
