@@ -24,9 +24,13 @@ var (
 func Generate(ctx *cli.Context) {
 	getDirectoryName()
 	exist, err := exists(directory)
-	if exist {
+	if exist && !force {
 		log.Fatal("A directory with these name already exist: ", directory)
+		log.Fatal("You can use the -f to force the creation of the folder ")
 		return
+	}
+	if exist && force {
+		os.RemoveAll(directory)
 	}
 	if err != nil {
 		log.Fatal("An error occur: ", err)

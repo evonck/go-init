@@ -18,7 +18,7 @@ import (
 var (
 	configPath string
 	configName string
-	force      string
+	force      bool
 	appName    string
 	v          *viper.Viper
 )
@@ -45,6 +45,11 @@ func main() {
 			Usage:  "name of the config",
 			Value:  "config",
 		},
+		cli.BoolFlag{
+			Name:   "force, f",
+			EnvVar: "FORCE",
+			Usage:  "force the creatino of the folder",
+		},
 	}
 	app.Action = func(c *cli.Context) {
 		if len(c.Args()) == 0 {
@@ -63,6 +68,7 @@ func main() {
 	app.Before = func(ctx *cli.Context) error {
 		configPath = ctx.String("configPath")
 		configName = ctx.String("ConfigName")
+		force = ctx.Bool("force")
 		return nil
 	}
 	app.Run(os.Args)
@@ -79,7 +85,6 @@ func LoadConfig() {
 		v = viper.New()
 		v.SetConfigName(configName)
 		v.AddConfigPath(configPath)
-		log.Print("Loading config file")
 		err := v.ReadInConfig() // Find and read the config file
 		if err != nil {         // Handle errors reading the config file
 			log.Fatal(fmt.Errorf("Fatal error config file: %s \n", err))
